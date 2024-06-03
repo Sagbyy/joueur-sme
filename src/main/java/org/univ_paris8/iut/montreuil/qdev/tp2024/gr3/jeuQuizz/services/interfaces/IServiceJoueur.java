@@ -1,7 +1,8 @@
 package org.univ_paris8.iut.montreuil.qdev.tp2024.gr3.jeuQuizz.services.interfaces;
 
-import org.univ_paris8.iut.montreuil.qdev.tp2024.gr3.jeuQuizz.entities.JoueurDTO;
-import org.univ_paris8.iut.montreuil.qdev.tp2024.gr3.jeuQuizz.utils.enums.Langues;
+import org.univ_paris8.iut.montreuil.qdev.tp2024.gr3.jeuQuizz.entities.bo.Joueur;
+import org.univ_paris8.iut.montreuil.qdev.tp2024.gr3.jeuQuizz.entities.dto.ScoreDTO;
+import org.univ_paris8.iut.montreuil.qdev.tp2024.gr3.jeuQuizz.utils.enums.Langue;
 import org.univ_paris8.iut.montreuil.qdev.tp2024.gr3.jeuQuizz.utils.exceptions.AnneeNaissanceInvalideException;
 import org.univ_paris8.iut.montreuil.qdev.tp2024.gr3.jeuQuizz.utils.exceptions.JoueurDejaExistantException;
 import org.univ_paris8.iut.montreuil.qdev.tp2024.gr3.jeuQuizz.utils.exceptions.LangueInvalideException;
@@ -9,8 +10,9 @@ import org.univ_paris8.iut.montreuil.qdev.tp2024.gr3.jeuQuizz.utils.exceptions.N
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 public interface IServiceJoueur {
-     public JoueurDTO ajouterJoueur(String nom, String pseudo, int annéeNaissance, Langues langue, HashSet<String> centreInteret) throws JoueurDejaExistantException, AnneeNaissanceInvalideException, LangueInvalideException, NomLongueurException;
-    ArrayList<JoueurDTO> obtenirListeJoueurs();
+    Joueur ajouterJoueur(int id, String pseudo, String prenom, int anneeNaissance, Langue langue, HashSet<String> centresInteret, List<ScoreDTO> listeScores) throws JoueurDejaExistantException, AnneeNaissanceInvalideException, LangueInvalideException, NomLongueurException;
+    ArrayList<Joueur> obtenirListeJoueurs();
 }

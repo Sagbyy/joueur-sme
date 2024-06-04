@@ -4,10 +4,8 @@ import org.univ_paris8.iut.montreuil.qdev.tp2024.gr3.jeuQuizz.entities.bo.Joueur
 import org.univ_paris8.iut.montreuil.qdev.tp2024.gr3.jeuQuizz.entities.dto.ScoreDTO;
 import org.univ_paris8.iut.montreuil.qdev.tp2024.gr3.jeuQuizz.services.interfaces.IServiceJoueur;
 import org.univ_paris8.iut.montreuil.qdev.tp2024.gr3.jeuQuizz.utils.enums.Langue;
-import org.univ_paris8.iut.montreuil.qdev.tp2024.gr3.jeuQuizz.utils.exceptions.AnneeNaissanceInvalideException;
-import org.univ_paris8.iut.montreuil.qdev.tp2024.gr3.jeuQuizz.utils.exceptions.JoueurDejaExistantException;
-import org.univ_paris8.iut.montreuil.qdev.tp2024.gr3.jeuQuizz.utils.exceptions.LangueInvalideException;
-import org.univ_paris8.iut.montreuil.qdev.tp2024.gr3.jeuQuizz.utils.exceptions.NomLongueurException;
+import org.univ_paris8.iut.montreuil.qdev.tp2024.gr3.jeuQuizz.utils.exceptions.FormatLangueInvalideException;
+import org.univ_paris8.iut.montreuil.qdev.tp2024.gr3.jeuQuizz.utils.exceptions.LongueurException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -30,21 +28,14 @@ public class ServiceJoueur implements IServiceJoueur {
     }
 
     @Override
-    public Joueur ajouterJoueur(int id, String pseudo, String prenom, int anneeNaissance, Langue langue, HashSet<String> centresInteret, List<ScoreDTO> listeScores) throws JoueurDejaExistantException, AnneeNaissanceInvalideException, LangueInvalideException, NomLongueurException, NomLongueurException, LangueInvalideException {
-        if (joueursDTO.stream().anyMatch(joueur -> joueur.getPseudo().equals(pseudo))) {
-            throw new JoueurDejaExistantException("Le pseudo choisi est déjà utilisé par un autre joueur.");
-        }
+    public Joueur ajouterJoueur(int id, String pseudo, String prenom, int anneeNaissance, Langue langue, HashSet<String> centresInteret, List<ScoreDTO> listeScores) throws  LongueurException, LongueurException, FormatLangueInvalideException {
 
         if (prenom.length() < 3 || pseudo.length() < 3) {
-            throw new NomLongueurException("Le prenom et le pseudo doivent contenir au moins 3 caractères.");
-        }
-
-        if (anneeNaissance < 1900 || anneeNaissance > LocalDate.now().getYear()) {
-            throw new AnneeNaissanceInvalideException("L'année de naissance " + anneeNaissance + " est invalide.");
+            throw new LongueurException("Le prenom et le pseudo doivent contenir au moins 3 caractères.");
         }
 
         if (langue == null) {
-            throw new LangueInvalideException("Le format de la langue est invalide.");
+            throw new FormatLangueInvalideException("Le format de la langue est invalide.");
         }
 
         Joueur nouveauJoueur = new Joueur(id, pseudo, prenom, centresInteret, anneeNaissance, langue, listeScores);

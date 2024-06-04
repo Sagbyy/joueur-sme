@@ -11,7 +11,7 @@ public class Joueur {
     private int id;
     private String pseudo;
     private String prenom;
-    private HashSet<String> centreInterets;
+    private String centreInterets;
     private int anneeNaissance;
     private Langue langue;
     private List<ScoreDTO> listeScores;
@@ -21,7 +21,7 @@ public class Joueur {
         this.id = id;
         this.pseudo = pseudo;
         this.prenom = prenom;
-        this.centreInterets = new HashSet<String>(centreInterets);
+        this.centreInterets = String.valueOf(new HashSet<String>(centreInterets));
         this.anneeNaissance = anneeNaissance;
         this.langue = langue;
         this.listeScores = listeScores;
